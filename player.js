@@ -1,4 +1,4 @@
-class Character extends Entity {
+class Player extends Entity {
     constructor (spriteSheet, x, y, canvasWidth, canvasHeight) {
         super();
         this.states = {
