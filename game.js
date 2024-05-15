@@ -1,9 +1,9 @@
 let canvasFP;
 let drawingSurface;
-let spriteSheetCharacter;
+let spriteSheetPlayer;
 let entities = [];
 let activeKeys = new Array(255);
-let character = undefined;
+let player = undefined;
 let camera = undefined;
 let gameWorld = undefined;
 let background = undefined;
@@ -34,7 +34,7 @@ function init() {
 	camera = new Camera(0, gameWorld.height / 2, 
 		Math.floor(gameWorld.width), gameWorld.height / 2);
 
-	spriteSheetCharacter = new SpriteSheet("assets/images/character.png", 
+	spriteSheetPlayer = new SpriteSheet("assets/images/character.png", 
 		"assets/images/character.json", spriteLoaded);
 	/*spriteSheetBack = new SpriteSheet("assets/grass.png",
 		"assets/grass.json", spriteLoaded);*/
@@ -49,9 +49,11 @@ function spriteLoaded() {
 		background.x = Math.floor((background.width / 3) * -2);
 		entities.push(background);*/
 
-		character = new Character(spriteSheetCharacter, canvasFP.width * 0.5 - 36, 
-			canvasFP.height - 120, canvasFP.width, canvasFP.height);
-		entities.push(character);
+		/*player = new player(spriteSheetplayer, canvasFP.width * 0.5 - 36, 
+			canvasFP.height - 120, canvasFP.width, canvasFP.height);*/
+		player = new Player(spriteSheetplayer, 0, 
+				0, canvasFP.width, canvasFP.height);
+		entities.push(player);
 	
 		update();
 		window.addEventListener("keydown", keyDownHandler, false);
@@ -72,14 +74,14 @@ function keyUpHandler(e) {
 
 function update() {
     if (activeKeys[keyboard.LEFT])
-       character.move(character.direction.LEFT);
+       player.move(player.direction.LEFT);
    if (activeKeys[keyboard.RIGHT])
-       character.move(character.direction.RIGHT);
+       player.move(player.direction.RIGHT);
 
    if (activeKeys[keyboard.SPACE]) 
    {
        activeKeys[keyboard.SPACE] = false;
-       character.stop();
+       player.stop();
 
        /*let fire = new Fire(spriteSheetTank, tank.x - 10,
            tank.y + tank.height * 0.5 - 10);
@@ -93,7 +95,7 @@ function update() {
    for (let i = 0; i < entities.length; i++)
        entities[i].update();
 
-   if(activeKeys[keyboard.LEFT] && background.x >= 0)
+   /*if(activeKeys[keyboard.LEFT] && background.x >= 0)
    {
        // TODO: A posição no eixo do x do background assume o valor inicial.
        background.x = Math.floor((background.width / 3) * -2);
@@ -105,19 +107,19 @@ function update() {
        background.x = 0;
    }
 
-   if(character.x < camera.leftInnerBoundary()) {
-       character.x = camera.leftInnerBoundary();
+   if(player.x < camera.leftInnerBoundary()) {
+       player.x = camera.leftInnerBoundary();
        // TODO: A velocidade do background no eixo do x assume 
            // a velocidade do tanque.
-       background.vx = character.vx;
+       background.vx = player.vx;
    }
 
-   if(character.x + character.width > camera.rightInnerBoundary()) {
-       character.x = camera.rightInnerBoundary() - character.width;
+   if(player.x + player.width > camera.rightInnerBoundary()) {
+       player.x = camera.rightInnerBoundary() - player.width;
        // TODO: A velocidade do background no eixo do x assume 
            // a velocidade do tanque no sentido oposto.
-       background.vx = -character.vx;
-   }
+       background.vx = -player.vx;
+   }*/
    
    requestAnimationFrame(update);
    render();
