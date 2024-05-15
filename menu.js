@@ -59,25 +59,25 @@ class menu {
                     }
                 
                     startGame() {
-                        console.log("Iniciar o jogo...");
-                        // Aqui você pode adicionar a lógica para iniciar o jogo
+                        console.log(this.menu.startGame);
+                        
                     }
                 
                     showControls() {
                         this.currentPage = this.controlsPage;
                         console.log(this.currentPage);
-                        // Aqui você pode adicionar a lógica para mostrar os controles do jogo
+                        
                     }
                 
                 
                     exitGame() {
                         console.log("Sair do jogo...");
-                        // Aqui você pode adicionar a lógica para sair do jogo
+                    
                     }
                 }
                 
                 // Exemplo de uso
-                const canvas = document.getElementById("gameCanvas");
+                const canvas = document.getElementById("canvas");
                 const context = canvas.getContext("2d");
                 const menu = new IntroductionMenu(canvas, context);
                 menu.display();
