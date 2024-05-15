@@ -1,5 +1,4 @@
-class Background extends Entity 
-{
+class Background extends Entity {
 	constructor(spriteSheet, x, y) {
 		super();
 		this.states = {
