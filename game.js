@@ -1,4 +1,4 @@
-let canvas;
+let canvasFP;
 let drawingSurface;
 let spriteSheetCharacter;
 let entities = [];
@@ -20,14 +20,14 @@ let keyboard = {
 window.addEventListener("load", init, false);
 
 function init() {
-	canvas = document.querySelector("canvasFP");
-	canvas.width = 550;
-	canvas.height = 400;
-	drawingSurface = canvas.getContext("2d");
+	canvasFP = document.querySelector("#canvasFP");
+	canvasFP.width = 550;
+	canvasFP.height = 400;
+	drawingSurface = canvasFP.getContext("2d");
 
 	gameWorld = new Entity();
-	gameWorld.width = canvas.width;
-	gameWorld.height = canvas.height;
+	gameWorld.width = canvasFP.width;
+	gameWorld.height = canvasFP.height;
 	gameWorld.x = 0;
 	gameWorld.y = 0;
 
@@ -49,8 +49,8 @@ function spriteLoaded() {
 		background.x = Math.floor((background.width / 3) * -2);
 		entities.push(background);*/
 
-		character = new Character(spriteSheetCharacter, canvas.width * 0.5 - 36, 
-			canvas.height - 120, canvas.width, canvas.height);
+		character = new Character(spriteSheetCharacter, canvasFP.width * 0.5 - 36, 
+			canvasFP.height - 120, canvasFP.width, canvasFP.height);
 		entities.push(character);
 	
 		update();
@@ -124,7 +124,7 @@ function update() {
 }
 
 function render() {   
-	drawingSurface.clearRect(0, 0, canvas.width, canvas.height);
+	drawingSurface.clearRect(0, 0, canvasFP.width, canvasFP.height);
   
   	for (let i = 0; i < entities.length; i++)
 	{ 
