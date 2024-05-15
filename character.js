@@ -46,10 +46,10 @@ class Character extends Entity {
     }
 
     setup() {
-        this.eStates.MOVE = this.spriteSheet.getStats('ANDAR');
-      this.eStates.SHOOT = this.spriteSheet.getStats('DISPARAR');
-      this.eStates.STOPPED = this.spriteSheet.getStats('PARADO');
-      this.eStates.HIT = this.spriteSheet.getStats('ATINGIDO');
+        this.eStates.MOVE = this.spriteSheet.getStats('WALK');
+        this.eStates.SHOOT = this.spriteSheet.getStats('ATTACK');
+        this.eStates.STOPPED = this.spriteSheet.getStats('IDLE');
+        //this.eStates.HIT = this.spriteSheet.getStats('ATINGIDO');
   
       this.frames = this.eStates[this.currentState];
       this.width = this.frames[0].width;

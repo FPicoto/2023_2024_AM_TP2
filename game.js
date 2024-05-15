@@ -34,10 +34,10 @@ function init() {
 	camera = new Camera(0, gameWorld.height / 2, 
 		Math.floor(gameWorld.width), gameWorld.height / 2);
 
-	spriteSheetCharacter = new SpriteSheet("assets/characters.png", 
-		"assets/characters.json", spriteLoaded);
-	spriteSheetBack = new SpriteSheet("assets/grass.png",
-		"assets/grass.json", spriteLoaded);
+	spriteSheetCharacter = new SpriteSheet("assets/images/character.png", 
+		"assets/images/character.json", spriteLoaded);
+	/*spriteSheetBack = new SpriteSheet("assets/grass.png",
+		"assets/grass.json", spriteLoaded);*/
 }
 
 function spriteLoaded() {
@@ -45,9 +45,9 @@ function spriteLoaded() {
 
 	if (assetsLoaded == 2)
 	{
-		background = new Background(spriteSheetBack, -5000, 0);
+		/*background = new Background(spriteSheetBack, -5000, 0);
 		background.x = Math.floor((background.width / 3) * -2);
-		entities.push(background); 
+		entities.push(background);*/
 
 		character = new Character(spriteSheetCharacter, canvas.width * 0.5 - 36, 
 			canvas.height - 120, canvas.width, canvas.height);
