@@ -4,9 +4,9 @@ class menu {
                         this.context = context;
                         this.title = "Bem-vindo ao Meu Jogo";
                         this.buttons = [
-                            { label: "Iniciar Jogo", action: () => this.startGame(), image: "New game Button.png", selectedImage: "New game col_Button_.png" },
-                            { label: "Controlos", action: () => this.showControls(), image: "Controls Button.png", selectedImage: "Controls col_Button.pngg" },
-                            { label: "Sair", action: () => this.exitGame(), image: "Return Square Button.png", selectedImage: "Return col_Square Button.png" }
+                            { label: "Iniciar Jogo", action: () => this.startGame(), image: "assets\images\Large Buttons\Large Buttons\New game Button.png", selectedImage: "assets\images\Large Buttons\Colored Large Buttons\New game col_Button_.png" },
+                            { label: "Controlos", action: () => this.showControls(), image: "assets\images\Large Buttons\Large Buttons\Controls Button.png", selectedImage: "assets\images\Large Buttons\Colored Large Buttons\Controls col_Button.png" },
+                            { label: "Sair", action: () => this.exitGame(), image: "assets\images\Large Buttons\Large Buttons\Exit Button.png", selectedImage: "assets\images\Large Buttons\Colored Large Buttons\Exit col_Button.png" }
                         ];
                         this.selectedButtonIndex = 0;
                         this.controlsPage = "Os controles do jogo são...";
@@ -59,27 +59,23 @@ class menu {
                     }
                 
                     startGame() {
-                        console.log(this.menu.startGame);
-                        
+                        console.log("Iniciar jogo...");
                     }
                 
                     showControls() {
                         this.currentPage = this.controlsPage;
                         console.log(this.currentPage);
-                        
                     }
-                
                 
                     exitGame() {
                         console.log("Sair do jogo...");
-                    
                     }
                 }
                 
                 // Exemplo de uso
-                const canvas = document.getElementById("canvas");
+                const canvas = document.getElementById("canvasCL");
                 const context = canvas.getContext("2d");
-                const menu = new IntroductionMenu(canvas, context);
+                const menu = new Menu(canvas, context);
                 menu.display();
                 
                 // Simulando a navegação no menu usando botões interativos
@@ -96,5 +92,3 @@ class menu {
                             break;
                     }
                 });
-                
-    
