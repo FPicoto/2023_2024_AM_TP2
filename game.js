@@ -20,7 +20,7 @@ let keyboard = {
 window.addEventListener("load", init, false);
 
 function init() {
-	canvas = document.querySelector("canvas");
+	canvas = document.querySelector("canvasFP");
 	canvas.width = 550;
 	canvas.height = 400;
 	drawingSurface = canvas.getContext("2d");

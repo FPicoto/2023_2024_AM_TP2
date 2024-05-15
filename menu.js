@@ -1,6 +1,6 @@
 class menu {
          constructor(canvas, context) {
-                        this.canvas = canvas;
+                        this.canvas = document.querySelector("#canvasCL");
                         this.context = context;
                         this.title = "Bem-vindo ao Meu Jogo";
                         this.buttons = [
