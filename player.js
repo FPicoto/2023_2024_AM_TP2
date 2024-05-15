@@ -20,8 +20,8 @@ class Player extends Entity {
         this.y = y;
         this.currentState = this.states.STOPPED;
         this.currentFrame = 0;
-        this.vx = 20;
-        this.vy = 20;
+        this.vx = 5;
+        this.vy = 5;
         this.canvasWidth = canvasWidth;
         this.canvasHeight = canvasHeight;
 
@@ -37,8 +37,8 @@ class Player extends Entity {
 
     update() {
         this.currentFrame = (++this.currentFrame) % this.frames.length;
-      this.width = this.frames[this.currentFrame].width;
-      this.height = this.frames[this.currentFrame].height;
+        this.width = this.frames[this.currentFrame].width;
+        this.height = this.frames[this.currentFrame].height;
     }
     
     getSprite() {
@@ -51,9 +51,9 @@ class Player extends Entity {
         this.eStates.STOPPED = this.spriteSheet.getStats('IDLE');
         //this.eStates.HIT = this.spriteSheet.getStats('ATINGIDO');
   
-      this.frames = this.eStates[this.currentState];
-      this.width = this.frames[0].width;
-      this.height = this.frames[0].height;
+        this.frames = this.eStates[this.currentState];
+        this.width = this.frames[0].width;
+        this.height = this.frames[0].height;
     }
 
     move(direction) {

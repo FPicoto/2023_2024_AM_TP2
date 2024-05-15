@@ -58,7 +58,6 @@ class SpriteSheet
             if (this.sprites[i].id.match(stName))
 				statsFrames.push(this.sprites[i]);
 		}
-
 		return statsFrames;
 	}
 }

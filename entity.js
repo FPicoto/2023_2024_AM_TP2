@@ -6,6 +6,7 @@ class Entity {
         sourceWidth: 64,
         sourceHeight: 64
       };
+      this.eStates = {};
   
       this.x = 0;
       this.y = 0;

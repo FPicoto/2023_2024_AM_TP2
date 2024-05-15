@@ -8,6 +8,7 @@ let camera = undefined;
 let gameWorld = undefined;
 let background = undefined;
 let assetsLoaded = 0;
+let fps, fpsInterval, startTime, now, timeThen, elapsed;
 
 let keyboard = {
 	SPACE: 32,
@@ -31,8 +32,7 @@ function init() {
 	gameWorld.x = 0;
 	gameWorld.y = 0;
 
-	camera = new Camera(0, gameWorld.height / 2, 
-		Math.floor(gameWorld.width), gameWorld.height / 2);
+	camera = new Camera(0, 0, Math.floor(gameWorld.width), gameWorld.height);
 
 	spriteSheetPlayer = new SpriteSheet("assets/images/character.png", 
 		"assets/images/character.json", spriteLoaded);
@@ -42,8 +42,8 @@ function init() {
 
 function spriteLoaded() {
 	assetsLoaded++;
-
-	if (assetsLoaded == 2)
+	
+	if (assetsLoaded > 0)
 	{
 		/*background = new Background(spriteSheetBack, -5000, 0);
 		background.x = Math.floor((background.width / 3) * -2);
@@ -51,14 +51,22 @@ function spriteLoaded() {
 
 		/*player = new player(spriteSheetplayer, canvasFP.width * 0.5 - 36, 
 			canvasFP.height - 120, canvasFP.width, canvasFP.height);*/
-		player = new Player(spriteSheetplayer, 0, 
-				0, canvasFP.width, canvasFP.height);
+		player = new Player(spriteSheetPlayer, 0, 
+				canvasFP.height / 2 - 48, canvasFP.width, canvasFP.height);
+		console.log(canvasFP.height / 2);
 		entities.push(player);
-	
-		update();
+
+		startAnimate(45);
 		window.addEventListener("keydown", keyDownHandler, false);
 		window.addEventListener("keyup", keyUpHandler, false);		
 	}
+}
+
+function startAnimate(fps) {
+	fpsInterval = 1000 / fps;
+	timeThen = Date.now();
+	startTime = timeThen;
+	update();
 }
 
 function keyDownHandler(e) {
@@ -67,29 +75,20 @@ function keyDownHandler(e) {
 
 function keyUpHandler(e) {
 	activeKeys[e.keyCode] = false;  
-	tank.stop();
+	player.stop();
 	// TODO: O background pára de se mover.
-	background.stop();
+	//background.stop();
 }
 
 function update() {
     if (activeKeys[keyboard.LEFT])
        player.move(player.direction.LEFT);
-   if (activeKeys[keyboard.RIGHT])
+   	if (activeKeys[keyboard.RIGHT])
        player.move(player.direction.RIGHT);
 
-   if (activeKeys[keyboard.SPACE]) 
-   {
+   if (activeKeys[keyboard.SPACE]) {
        activeKeys[keyboard.SPACE] = false;
        player.stop();
-
-       /*let fire = new Fire(spriteSheetTank, tank.x - 10,
-           tank.y + tank.height * 0.5 - 10);
-       entities.push(fire);
-
-       let bullet = new Bullet(spriteSheetTank,
-           tank.x, tank.y + tank.height * 0.5);
-       entities.push(bullet);*/
    }
  
    for (let i = 0; i < entities.length; i++)
@@ -122,7 +121,14 @@ function update() {
    }*/
    
    requestAnimationFrame(update);
-   render();
+
+   now = Date.now();
+   elapsed = now - timeThen;
+   
+   if (elapsed > fpsInterval) {
+		timeThen = now - (elapsed % fpsInterval);
+		render();
+	}
 }
 
 function render() {   
@@ -131,7 +137,7 @@ function render() {
   	for (let i = 0; i < entities.length; i++)
 	{ 
     	let entity = entities[i];
-		let sprite = entity.getSprite();  
+		let sprite = entity.getSprite();
 	 
     	if (!entity.killed)
 		{
@@ -140,10 +146,13 @@ function render() {
 				sprite.x, sprite.y, 
 				sprite.width, sprite.height,
 				entity.x, entity.y,  
-				entity.width, entity.height
+				entity.width*1.5, entity.height*1.5
 			);
   		}
   	}
 
 	camera.drawFrame(drawingSurface, true);
 }
+
+// CONTROLO DE TEMPO PARA BAIXAR O REFRESH RATE
+// https://stackoverflow.com/questions/19764018/controlling-fps-with-requestanimationframe
