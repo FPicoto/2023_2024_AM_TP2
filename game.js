@@ -119,19 +119,11 @@ function update() {
            // a velocidade do tanque no sentido oposto.
        background.vx = -player.vx;
    }*/
-   render();
+   
 	setTimeout(() => {
 		requestAnimationFrame(update);
    	}, 1000 / fps);
-   
-
-   /*now = Date.now();
-   elapsed = now - timeThen;
-   
-   if (elapsed > fpsInterval) {
-		timeThen = now - (elapsed % fpsInterval);
-		render();
-	}*/
+	render();
 }
 
 function render() {   
@@ -142,8 +134,7 @@ function render() {
     	let entity = entities[i];
 		let sprite = entity.getSprite();
 	 
-    	if (!entity.killed)
-		{
+    	if (!entity.killed) {
 			drawingSurface.drawImage(
 				entity.spriteSheet.img, 
 				sprite.x, sprite.y, 
@@ -159,3 +150,7 @@ function render() {
 
 // CONTROLO DE TEMPO PARA BAIXAR O REFRESH RATE DO RequestAnimationFrame()
 // https://stackoverflow.com/questions/19764018/controlling-fps-with-requestanimationframe
+
+// Para edição de imagens 
+// https://pinetools.com (Espelho, juncao e transformar o background branco em transparente)
+// https://www.remove.bg (Transformar o background branco em transparente)
