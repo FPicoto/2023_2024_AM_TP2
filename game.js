@@ -8,7 +8,8 @@ let camera = undefined;
 let gameWorld = undefined;
 let background = undefined;
 let assetsLoaded = 0;
-let fps, fpsInterval, startTime, now, timeThen, elapsed;
+let fps = 10;
+//let fps, fpsInterval, startTime, now, timeThen, elapsed;
 
 let keyboard = {
 	SPACE: 32,
@@ -53,10 +54,9 @@ function spriteLoaded() {
 			canvasFP.height - 120, canvasFP.width, canvasFP.height);*/
 		player = new Player(spriteSheetPlayer, 0, 
 				canvasFP.height / 2 - 48, canvasFP.width, canvasFP.height);
-		console.log(canvasFP.height / 2);
 		entities.push(player);
 
-		startAnimate(45);
+		update();
 		window.addEventListener("keydown", keyDownHandler, false);
 		window.addEventListener("keyup", keyUpHandler, false);		
 	}
@@ -119,16 +119,19 @@ function update() {
            // a velocidade do tanque no sentido oposto.
        background.vx = -player.vx;
    }*/
+   render();
+	setTimeout(() => {
+		requestAnimationFrame(update);
+   	}, 1000 / fps);
    
-   requestAnimationFrame(update);
 
-   now = Date.now();
+   /*now = Date.now();
    elapsed = now - timeThen;
    
    if (elapsed > fpsInterval) {
 		timeThen = now - (elapsed % fpsInterval);
 		render();
-	}
+	}*/
 }
 
 function render() {   
@@ -146,7 +149,7 @@ function render() {
 				sprite.x, sprite.y, 
 				sprite.width, sprite.height,
 				entity.x, entity.y,  
-				entity.width*1.5, entity.height*1.5
+				entity.width*2, entity.height*2
 			);
   		}
   	}
@@ -154,5 +157,5 @@ function render() {
 	camera.drawFrame(drawingSurface, true);
 }
 
-// CONTROLO DE TEMPO PARA BAIXAR O REFRESH RATE
+// CONTROLO DE TEMPO PARA BAIXAR O REFRESH RATE DO RequestAnimationFrame()
 // https://stackoverflow.com/questions/19764018/controlling-fps-with-requestanimationframe
