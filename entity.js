@@ -1,20 +1,20 @@
 class Entity {
     constructor() {
-      this.sprite = {
-        sourceX: 0,
-        sourceY: 0,
-        sourceWidth: 64,
-        sourceHeight: 64
-      };
-      this.eStates = {};
-  
-      this.x = 0;
-      this.y = 0;
-      this.width = 64;
-      this.height = 64;
-  
-      this.vx = 3;
-      this.vy = 3;
+        this.sprite = {
+            sourceX: 0,
+            sourceY: 0,
+            sourceWidth: 64,
+            sourceHeight: 64
+        };
+        this.eStates = {};
+    
+        this.x = 0;
+        this.y = 0;
+        this.width = 64;
+        this.height = 64;
+    
+        this.vx = 3;
+        this.vy = 3;
     }
   
     update() { };
@@ -44,5 +44,4 @@ class Entity {
     update (canvasWidth, canvasHeight) {
         // The update is empty by default.
     }
-  }
-  
+}

@@ -1,6 +1,5 @@
 let canvasFP;
 let drawingSurface;
-let spriteSheetPlayer;
 let entities = [];
 let activeKeys = new Array(255);
 let player = undefined;
@@ -13,7 +12,6 @@ let background_4 = undefined;
 let background_5 = undefined;
 let assetsLoaded = 0;
 let fps = 10;
-//let fps, fpsInterval, startTime, now, timeThen, elapsed;
 
 let keyboard = {
 	SPACE: 32,
@@ -37,27 +35,27 @@ function init() {
 	gameWorld.x = 0;
 	gameWorld.y = 0;
 
-	camera = new Camera(0, 0, 
-		Math.floor(gameWorld.width), gameWorld.height);
+	camera = new Camera(0, 0, Math.floor(gameWorld.width), gameWorld.height);
 
+	// Player
 	spriteSheetPlayer = new SpriteSheet("assets/images/character.png", 
 		"assets/images/character.json", spriteLoaded);
 
 	// Background 1
 	spriteSheetBack1 = new SpriteSheet("assets/images/background_1.png",
-	"assets/images/background_1.json", spriteLoaded);
+		"assets/images/background_1.json", spriteLoaded);
 
 	// Background 2
 	spriteSheetBack2 = new SpriteSheet("assets/images/background_2.png",
-	"assets/images/background_2.json", spriteLoaded);
+		"assets/images/background_2.json", spriteLoaded);
 
 	// Background 3
 	spriteSheetBack3 = new SpriteSheet("assets/images/background_3.png",
-	"assets/images/background_3.json", spriteLoaded);
+		"assets/images/background_3.json", spriteLoaded);
 
 	// Background 4
 	spriteSheetBack4 = new SpriteSheet("assets/images/background_4.png",
-	"assets/images/background_4.json", spriteLoaded);
+		"assets/images/background_4.json", spriteLoaded);
 
 	// Background 5
 	spriteSheetBack5 = new SpriteSheet("assets/images/background_5.png",
@@ -67,8 +65,7 @@ function init() {
 function spriteLoaded() {
 	assetsLoaded++;
 	
-	if (assetsLoaded > 0)
-	{
+	if (assetsLoaded > 0) {
 		// Background 1
 		background_1 = new Background(spriteSheetBack1, 0, 0);
 		background_1.x = Math.floor((background_1.width / 3) * - 2);
@@ -120,65 +117,74 @@ function keyUpHandler(e) {
 }
 
 function update() {
-    if (activeKeys[keyboard.LEFT]) {
-		drawingSurface.save();
-		drawingSurface.scale(-1,1);
+	if (activeKeys[keyboard.LEFT])
 		player.move(player.direction.LEFT);
-		drawingSurface.restore();
-	}
-       
+
    	if (activeKeys[keyboard.RIGHT])
-       player.move(player.direction.RIGHT);
+    	player.move(player.direction.RIGHT);
 
-   if (activeKeys[keyboard.SPACE]) {
-       activeKeys[keyboard.SPACE] = false;
-       player.stop();
-   }
+   	if (activeKeys[keyboard.SPACE]) {
+    	activeKeys[keyboard.SPACE] = false;
+    	player.stop();
+   	}
  
-   for (let i = 0; i < entities.length; i++)
-       entities[i].update();
+	for (let i = 0; i < entities.length; i++)
+    	entities[i].update();
 
-   if(activeKeys[keyboard.LEFT] && background_5.x >= 0)
-   {
-       // TODO: A posição no eixo do x do background assume o valor inicial.
-	   background_1.x = Math.floor((background_1.width / 3) * -2);
-	   background_2.x = Math.floor((background_2.width / 3) * -2);
-	   background_3.x = Math.floor((background_3.width / 3) * -2);
-	   background_4.x = Math.floor((background_4.width / 3) * -2);
-       background_5.x = Math.floor((background_5.width / 3) * -2);
-   }
-   else if(activeKeys[keyboard.RIGHT] 
-       && background_5.x <= Math.floor((background_5.width / 3) * -2))
-   {
-       // TODO: A posição no eixo do x do background assume o valor de 0.
-	   background_1.x = 0;
-	   background_2.x = 0;
-	   background_3.x = 0;
-	   background_4.x = 0;
-       background_5.x = 0;
+	// Background 1
+   	if (activeKeys[keyboard.LEFT] && background_1.x >= 0) {
+		background_1.x = Math.floor((background_1.width / 3) * -2);
+	} else if (activeKeys[keyboard.RIGHT] && background_1.x <= Math.floor((background_1.width / 3) * -2)) {
+		background_1.x = 0;
+	}
+
+	// Background 2
+	if (activeKeys[keyboard.LEFT] && background_2.x >= 0) {
+		background_2.x = Math.floor((background_2.width / 3) * -2);
+	} else if (activeKeys[keyboard.RIGHT] && background_2.x <= Math.floor((background_2.width / 3) * -2)) {
+		background_2.x = 0;
+	}
+
+	// Background 3
+	if (activeKeys[keyboard.LEFT] && background_3.x >= 0) {
+		background_3.x = Math.floor((background_3.width / 3) * -2);
+	} else if (activeKeys[keyboard.RIGHT] && background_3.x <= Math.floor((background_3.width / 3) * -2)) {
+		background_3.x = 0;
+	}
+
+	// Background 4
+	if (activeKeys[keyboard.LEFT] && background_4.x >= 0) {
+		background_4.x = Math.floor((background_4.width / 3) * -2);
+	} else if (activeKeys[keyboard.RIGHT] && background_4.x <= Math.floor((background_4.width / 3) * -2)) {
+		background_4.x = 0;
+	}
+
+	// Background 5
+	if (activeKeys[keyboard.LEFT] && background_5.x >= 0) {
+		background_5.x = Math.floor((background_5.width / 3) * -2);
+	} else if (activeKeys[keyboard.RIGHT] && background_5.x <= Math.floor((background_5.width / 3) * -2)) {
+		background_5.x = 0;
+	}
+
+   if (player.x + 64 < camera.leftInnerBoundary()) {
+		player.x = camera.leftInnerBoundary() - 64;
+
+		background_1.vx = player.vx / 20;
+		background_2.vx = player.vx / 10; 
+		background_3.vx = player.vx / 5;
+		background_4.vx = player.vx / 2;
+		background_5.vx = player.vx;
    }
 
-   if(player.x + 64 < camera.leftInnerBoundary()) {
-       player.x = camera.leftInnerBoundary() - 64;
-       // TODO: A velocidade do background no eixo do x assume 
-           // a velocidade do tanque.
-       background_1.vx = player.vx / 20;
-	   background_2.vx = player.vx / 10; 
-	   background_3.vx = player.vx / 5;
-	   background_4.vx = player.vx / 2;
-	   background_5.vx = player.vx;
-   }
+   	if (player.x + player.width + 32 > camera.rightInnerBoundary()) {
+		player.x = camera.rightInnerBoundary() - player.width - 32;
 
-   if(player.x + player.width + 32 > camera.rightInnerBoundary()) {
-       player.x = camera.rightInnerBoundary() - player.width - 32;
-       // TODO: A velocidade do background no eixo do x assume 
-           // a velocidade do tanque no sentido oposto.
-       background_1.vx = -player.vx / 20;
-	   background_2.vx = -player.vx / 10;
-	   background_3.vx = -player.vx / 5;
-	   background_4.vx = -player.vx / 2;
-	   background_5.vx = -player.vx;
-   }
+    	background_1.vx = -player.vx / 20;
+		background_2.vx = -player.vx / 10;
+		background_3.vx = -player.vx / 5;
+		background_4.vx = -player.vx / 2;
+		background_5.vx = -player.vx;
+   	}
    
 	setTimeout(() => {
 		requestAnimationFrame(update);
@@ -189,8 +195,7 @@ function update() {
 function render() {   
 	drawingSurface.clearRect(0, 0, canvasFP.width, canvasFP.height);
 
-  	for (let i = 0; i < entities.length; i++)
-	{ 
+  	for (let i = 0; i < entities.length; i++) { 
     	let entity = entities[i];
 		let sprite = entity.getSprite();
 	 
@@ -214,13 +219,6 @@ function render() {
 					entity.width*1.5, entity.height*1.5
 				);
 			}
-			/*drawingSurface.drawImage(
-				entity.spriteSheet.img, 
-				sprite.x, sprite.y, 
-				sprite.width, sprite.height,
-				entity.x, entity.y,  
-				entity.width, entity.height
-			);*/
   		}
   	}
 

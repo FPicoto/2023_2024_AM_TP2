@@ -1,5 +1,4 @@
-class SpriteSheet 
-{
+class SpriteSheet {
 	constructor(spriteSheetImage, spriteSheetJSON, callback) {
 		this.img = null;
 		this.sprites = new Array();
@@ -52,8 +51,7 @@ class SpriteSheet
 	getStats(name) {
 		let statsFrames = new Array();
 
-		for(let i = 0; i < this.sprites.length; i++)
-		{
+		for(let i = 0; i < this.sprites.length; i++) {
 			let stName = new RegExp(name, "gi");
             if (this.sprites[i].id.match(stName))
 				statsFrames.push(this.sprites[i]);

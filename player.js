@@ -20,7 +20,7 @@ class Player extends Entity {
         this.y = y;
         this.currentState = this.states.STOPPED;
         this.currentFrame = 0;
-        this.vx = 7.5;
+        this.vx = 15;
         this.vy = 5;
         this.canvasWidth = canvasWidth;
         this.canvasHeight = canvasHeight;
