@@ -17,11 +17,8 @@ class Background extends Entity {
 	  
 	update() {
 		this.x += this.vx;
-        this.y += this.vy;
 		if (this.x == Math.round(this.width / 3 * 2))
 			this.x = 0;
-        if (this.y == Math.round(this.height / 3 * 2))
-			this.y = 0;
 	}
 
 	getSprite() {

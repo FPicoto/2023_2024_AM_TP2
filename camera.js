@@ -13,19 +13,19 @@ class Camera extends Entity {
 	}
 
 	rightInnerBoundary() {
-		return this.x + (this.width * 0.75);
+		return this.x + (this.width * 0.80);
 	} 
 	  
 	leftInnerBoundary() {
-		return this.x + (this.width * 0.25);
+		return this.x + (this.width * 0.20);
 	} 
 	  
 	topInnerBoundary() {
-		return this.y + (this.height * 0.25);
+		return this.y + (this.height * 0.50);
 	} 
 	  
 	bottomInnerBoundary() {
-		return this.y + (this.height * 0.75);
+		return this.y + (this.height);
 	}
   
 	drawFrame(ctx, drawInnerBoundaries, colorF, colorIB) {
