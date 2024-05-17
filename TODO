@@ -1,4 +1,26 @@
 Francisco:
-    - Import ao boneco; Check
-    - Import ao background;
+    - Dar flip às imagens de andar
+    - Criar e alterar o novo ficheiro JSON
+    - Alterar o ficheiro Player.js para obter os sprites de andar para esquerda e direita
+    - Procurar 3 músicas, uma para cada dificuldade do jogo
+    - Alterar o codigo no Game.js para fazer o player atacar
+    
+    Falta fazer:
+    - Encontrar 3 Spritesheets de inimigos
+    - Criar os JSONs das mesmas
+    - Funcoes para criar inimigos
+    - Detecao de colisao entre player e inimigos
     - 
+    - Função de cronometro
+    - Controlar o tempo de maneira a criar inimigos diferentes
+
+    Ideia:
+    - Arranjar uma Spritesheet de um portal para levar o player para o nivel seguinte
+
+    FIX:
+        - Backgrounds com glitch no background looping, perguntar ao prof.
+
+
+
+Carlos:
+    -
