@@ -36,6 +36,7 @@ function init() {
 	gameWorld.y = 0;
 
 	camera = new Camera(0, 0, Math.floor(gameWorld.width), gameWorld.height);
+	camera.center(gameWorld);
 
 	// Player
 	spriteSheetPlayer = new SpriteSheet("assets/images/character.png", 
@@ -116,6 +117,8 @@ function keyUpHandler(e) {
 	background_5.stop();
 }
 
+
+
 function update() {
 	if (activeKeys[keyboard.LEFT])
 		player.move(player.direction.LEFT);
@@ -125,11 +128,11 @@ function update() {
 
    	if (activeKeys[keyboard.SPACE]) {
     	activeKeys[keyboard.SPACE] = false;
-    	player.stop();
+		player.attack();
    	}
  
 	for (let i = 0; i < entities.length; i++)
-    	entities[i].update();
+		entities[i].update();
 
 	// Background 1
    	if (activeKeys[keyboard.LEFT] && background_1.x >= 0) {

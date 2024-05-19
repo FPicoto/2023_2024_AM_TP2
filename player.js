@@ -3,7 +3,7 @@ class Player extends Entity {
         super();
         this.states = {
             MOVE: 'MOVE',
-            SHOOT: 'SHOOT',
+            ATTACK: 'ATTACK',
             STOPPED: 'STOPPED',
             HIT: 'HIT'
         };
@@ -47,7 +47,7 @@ class Player extends Entity {
 
     setup() {
         this.eStates.MOVE = this.spriteSheet.getStats('WALK');
-        this.eStates.SHOOT = this.spriteSheet.getStats('ATTACK');
+        this.eStates.ATTACK = this.spriteSheet.getStats('ATTACK');
         this.eStates.STOPPED = this.spriteSheet.getStats('IDLE');
         //this.eStates.HIT = this.spriteSheet.getStats('ATINGIDO');
   
@@ -79,8 +79,8 @@ class Player extends Entity {
         this.toggleState(this.states.STOPPED);
     }
 
-    shoot() {
-        this.toggleState(this.states.SHOOT);
+    attack() {
+        this.toggleState(this.states.ATTACK);
     }
 
     toggleState(newState) {
