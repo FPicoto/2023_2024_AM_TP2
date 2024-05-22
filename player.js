@@ -28,6 +28,7 @@ class Player extends Entity {
         this.canvasWidth = canvasWidth;
         this.canvasHeight = canvasHeight;
         this.flip = 0;
+        
         this.valueHP = 100;
         this.valueCoins = 0;
         this.valueExp = 0;

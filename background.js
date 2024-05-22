@@ -17,7 +17,7 @@ class Background extends Entity {
 	  
 	update() {
 		this.x += this.vx;
-		if (this.x == Math.round(this.width / 3 * 2))
+		if (this.x == Math.round((this.width * 1.5) / 3 * 2))
 			this.x = 0;
 	}
 

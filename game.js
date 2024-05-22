@@ -26,7 +26,7 @@ window.addEventListener("load", init, false);
 
 function init() {
 	canvasFP = document.querySelector("#canvasFP");
-	canvasFP.width = 500;
+	canvasFP.width = 480;
 	canvasFP.height = 270;
 	drawingSurface = canvasFP.getContext("2d");
 
@@ -70,22 +70,22 @@ function spriteLoaded() {
 	if (assetsLoaded > 0) {
 		// Background 1
 		background_1 = new Background(spriteSheetBack1, 0, 0);
-		background_1.x = Math.floor((background_1.width / 3) * - 2);
+		background_1.x = Math.floor(((background_1.width * 1.5) / 3) * - 2);
 		entities.push(background_1);
 
 		// Background 2
 		background_2 = new Background(spriteSheetBack2, 0, 0);
-		background_2.x = Math.floor((background_2.width / 3) * - 2);
+		background_2.x = Math.floor(((background_2.width * 1.5) / 3) * - 2);
 		entities.push(background_2);
 
 		// Background 3
 		background_3 = new Background(spriteSheetBack3, 0, 0);
-		background_3.x = Math.floor((background_3.width / 3) * - 2);
+		background_3.x = Math.floor(((background_3.width * 1.5) / 3) * - 2);
 		entities.push(background_3);
 
 		// Background 4
 		background_4 = new Background(spriteSheetBack4, 0, 0);
-		background_4.x = Math.floor((background_4.width / 3) * - 2);
+		background_4.x = Math.floor(((background_4.width * 1.5) / 3) * - 2);
 		entities.push(background_4);
 
 		// Player
@@ -95,7 +95,7 @@ function spriteLoaded() {
 
 		// Background 5
 		background_5 = new Background(spriteSheetBack5, 0, 0);
-		background_5.x = Math.floor((background_5.width / 3) * - 2);
+		background_5.x = Math.floor(((background_5.width * 1.5) / 3) * - 2);
 		entities.push(background_5);
 
 		update();
@@ -109,13 +109,15 @@ function keyDownHandler(e) {
 }
 
 function keyUpHandler(e) {
-	activeKeys[e.keyCode] = false;
-	player.stop();
-	background_1.stop();
-	background_2.stop();
-	background_3.stop();
-	background_4.stop();
-	background_5.stop();
+	if (e.keyCode != keyboard.SPACE) {
+		activeKeys[e.keyCode] = false;
+		player.stop();
+		background_1.stop();
+		background_2.stop();
+		background_3.stop();
+		background_4.stop();
+		background_5.stop();
+	}
 }
 
 function update() {
@@ -129,53 +131,61 @@ function update() {
 		player.flip = 0;
 	}
 	
-	if (activeKeys[keyboard.SPACE])
+	if (activeKeys[keyboard.SPACE]) {
+		activeKeys[keyboard.SPACE] = false;
 		player.attack();
+		
+	}
+		
+
 
 	for (let i = 0; i < entities.length; i++)
 		entities[i].update();
 
+	// Background 1 -> Mais longe
+	// Background 5 -> Mais perto
+
 	// Background 1
    	if (activeKeys[keyboard.LEFT] && background_1.x >= 0) {
-		background_1.x = Math.floor((background_1.width / 3) * -2);
-	} else if (activeKeys[keyboard.RIGHT] && background_1.x <= Math.floor((background_1.width / 3) * -2)) {
+		background_1.x = Math.floor(((background_1.width * 1.5) / 3) * -2);
+	} else if (activeKeys[keyboard.RIGHT] && background_1.x <= Math.floor(((background_1.width * 1.5) / 3) * -2)) {
 		background_1.x = 0;
 	}
 
 	// Background 2
 	if (activeKeys[keyboard.LEFT] && background_2.x >= 0) {
-		background_2.x = Math.floor((background_2.width / 3) * -2);
-	} else if (activeKeys[keyboard.RIGHT] && background_2.x <= Math.floor((background_2.width / 3) * -2)) {
+		background_2.x = Math.floor(((background_2.width * 1.5) / 3) * -2);
+	} else if (activeKeys[keyboard.RIGHT] && background_2.x <= Math.floor(((background_2.width * 1.5) / 3) * -2)) {
 		background_2.x = 0;
 	}
 
 	// Background 3
 	if (activeKeys[keyboard.LEFT] && background_3.x >= 0) {
-		background_3.x = Math.floor((background_3.width / 3) * -2);
-	} else if (activeKeys[keyboard.RIGHT] && background_3.x <= Math.floor((background_3.width / 3) * -2)) {
+		background_3.x = Math.floor(((background_3.width * 1.5) / 3) * -2);
+	} else if (activeKeys[keyboard.RIGHT] && background_3.x <= Math.floor(((background_3.width * 1.5) / 3) * -2)) {
 		background_3.x = 0;
 	}
 
 	// Background 4
 	if (activeKeys[keyboard.LEFT] && background_4.x >= 0) {
-		background_4.x = Math.floor((background_4.width / 3) * -2);
-	} else if (activeKeys[keyboard.RIGHT] && background_4.x <= Math.floor((background_4.width / 3) * -2)) {
+		background_4.x = Math.floor(((background_4.width * 1.5) / 3) * -2);
+	} else if (activeKeys[keyboard.RIGHT] && background_4.x <= Math.floor(((background_4.width * 1.5) / 3) * -2)) {
 		background_4.x = 0;
 	}
 
 	// Background 5
 	if (activeKeys[keyboard.LEFT] && background_5.x >= 0) {
-		background_5.x = Math.floor((background_5.width / 3) * -2);
-	} else if (activeKeys[keyboard.RIGHT] && background_5.x <= Math.floor((background_5.width / 3) * -2)) {
+		background_5.x = Math.floor(((background_5.width * 1.5) / 3) * -2);
+	} else if (activeKeys[keyboard.RIGHT] && background_5.x <= Math.floor(((background_5.width * 1.5) / 3) * -2)) {
 		background_5.x = 0;
 	}
 
    if (player.x + 64 < camera.leftInnerBoundary()) {
 		player.x = camera.leftInnerBoundary() - 64;
 
-		background_1.vx = player.vx / 20;
-		background_2.vx = player.vx / 10; 
-		background_3.vx = player.vx / 5;
+		background_1.vx = player.vx / 30;
+		background_2.vx = player.vx / 20; 
+		background_3.vx = player.vx / 10;
 		background_4.vx = player.vx / 2;
 		background_5.vx = player.vx;
    }
@@ -183,9 +193,9 @@ function update() {
    	if (player.x + player.width + 32 > camera.rightInnerBoundary()) {
 		player.x = camera.rightInnerBoundary() - player.width - 32;
 
-    	background_1.vx = -player.vx / 20;
-		background_2.vx = -player.vx / 10;
-		background_3.vx = -player.vx / 5;
+    	background_1.vx = -player.vx / 30;
+		background_2.vx = -player.vx / 20;
+		background_3.vx = -player.vx / 10;
 		background_4.vx = -player.vx / 2;
 		background_5.vx = -player.vx;
    	}
