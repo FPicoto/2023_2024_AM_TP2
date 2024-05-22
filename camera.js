@@ -28,7 +28,7 @@ class Camera extends Entity {
 		return this.y + (this.height);
 	}
   
-	drawFrame(ctx, drawInnerBoundaries, colorF, colorIB) {
+	/*drawFrame(ctx, drawInnerBoundaries, colorF, colorIB) {
 		colorF = colorF != undefined ? colorF : "red";
 		colorIB = colorIB != undefined ? colorIB : "blue";
 		if (ctx == undefined || drawInnerBoundaries == undefined)
@@ -66,5 +66,5 @@ class Camera extends Entity {
 
 			ctx.fillText("Camera Inner Boundaries", this.leftInnerBoundary() + 5,this.topInnerBoundary() + 15);
 		}
-	}
+	}*/
 }

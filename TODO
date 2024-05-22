@@ -1,7 +1,4 @@
 Francisco:
-    - Dar flip às imagens de andar
-    - Criar e alterar o novo ficheiro JSON
-    - Alterar o ficheiro Player.js para obter os sprites de andar para esquerda e direita
     - Procurar 3 músicas, uma para cada dificuldade do jogo
     - Alterar o codigo no Game.js para fazer o player atacar
     

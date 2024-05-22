@@ -2,10 +2,13 @@ class Player extends Entity {
     constructor (spriteSheet, x, y, canvasWidth, canvasHeight) {
         super();
         this.states = {
-            MOVE: 'MOVE',
-            ATTACK: 'ATTACK',
-            STOPPED: 'STOPPED',
-            HIT: 'HIT'
+            MOVE_RIGHT: 'MOVE_RIGHT',
+            ATTACK_RIGHT: 'ATTACK_RIGHT',
+            STOPPED_RIGHT: 'STOPPED_RIGHT',
+            HIT: 'HIT',
+            MOVE_LEFT: 'MOVE_LEFT',
+            ATTACK_LEFT: 'ATTACK_LEFT',
+            STOPPED_LEFT: 'STOPPED_LEFT',
         };
       
         this.direction = {
@@ -18,13 +21,13 @@ class Player extends Entity {
         this.spriteSheet = spriteSheet;
         this.x = x;
         this.y = y;
-        this.currentState = this.states.STOPPED;
+        this.currentState = this.states.STOPPED_RIGHT;
         this.currentFrame = 0;
         this.vx = 15;
         this.vy = 5;
         this.canvasWidth = canvasWidth;
         this.canvasHeight = canvasHeight;
-
+        this.flip = 0;
         this.valueHP = 100;
         this.valueCoins = 0;
         this.valueExp = 0;
@@ -46,9 +49,12 @@ class Player extends Entity {
     }
 
     setup() {
-        this.eStates.MOVE = this.spriteSheet.getStats('WALK');
-        this.eStates.ATTACK = this.spriteSheet.getStats('ATTACK');
-        this.eStates.STOPPED = this.spriteSheet.getStats('IDLE');
+        this.eStates.MOVE_RIGHT = this.spriteSheet.getStats('WALK_RIGHT');
+        this.eStates.MOVE_LEFT = this.spriteSheet.getStats('WALK_LEFT');
+        this.eStates.ATTACK_RIGHT = this.spriteSheet.getStats('ATTACK_RIGHT');
+        this.eStates.ATTACK_LEFT = this.spriteSheet.getStats('ATTACK_LEFT');
+        this.eStates.STOPPED_RIGHT = this.spriteSheet.getStats('IDLE_RIGHT');
+        this.eStates.STOPPED_LEFT = this.spriteSheet.getStats('IDLE_LEFT');
         //this.eStates.HIT = this.spriteSheet.getStats('ATINGIDO');
   
         this.frames = this.eStates[this.currentState];
@@ -56,31 +62,31 @@ class Player extends Entity {
         this.height = this.frames[0].height;
     }
 
-    move(direction) {
-        this.toggleState(this.states.MOVE);
-        
+    move(direction) {  
         switch (direction) {
           case this.direction.LEFT:
+            this.toggleState(this.states.MOVE_LEFT);
             this.x -= this.x - this.vx >= 0 ? this.vx : 0;
             break;
           case this.direction.RIGHT:
+            this.toggleState(this.states.MOVE_RIGHT);
             this.x += this.x + this.vx <= this.canvasWidth - this.width ? this.vx : 0;
-            break;
-          case this.direction.UP:
-            this.y -= this.y - this.vy >= 0 ? this.vy : 0;
-            break;
-          case this.direction.DOWN:
-            this.y += this.y + this.vy <= this.canvasHeight - this.height ? this.vy : 0;
             break;
         }
     }
-      
+
     stop() {
-        this.toggleState(this.states.STOPPED);
+        if (this.flip == 0)
+            this.toggleState(this.states.STOPPED_RIGHT);
+        if (this.flip == 1)
+            this.toggleState(this.states.STOPPED_LEFT);
     }
 
     attack() {
-        this.toggleState(this.states.ATTACK);
+        if (this.flip == 0)
+            this.toggleState(this.states.ATTACK_RIGHT);
+        if (this.flip == 1)
+            this.toggleState(this.states.ATTACK_LEFT);
     }
 
     toggleState(newState) {

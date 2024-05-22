@@ -12,6 +12,7 @@ let background_4 = undefined;
 let background_5 = undefined;
 let assetsLoaded = 0;
 let fps = 10;
+let lastKeyPressed = undefined;
 
 let keyboard = {
 	SPACE: 32,
@@ -104,11 +105,11 @@ function spriteLoaded() {
 }
 
 function keyDownHandler(e) {
-	activeKeys[e.keyCode] = true;  
+	activeKeys[e.keyCode] = true;
 }
 
 function keyUpHandler(e) {
-	activeKeys[e.keyCode] = false;  
+	activeKeys[e.keyCode] = false;
 	player.stop();
 	background_1.stop();
 	background_2.stop();
@@ -117,20 +118,20 @@ function keyUpHandler(e) {
 	background_5.stop();
 }
 
-
-
 function update() {
-	if (activeKeys[keyboard.LEFT])
+	if (activeKeys[keyboard.LEFT]) {
 		player.move(player.direction.LEFT);
-
-   	if (activeKeys[keyboard.RIGHT])
+		player.flip = 1;
+	}
+		
+   	if (activeKeys[keyboard.RIGHT]) {
     	player.move(player.direction.RIGHT);
-
-   	if (activeKeys[keyboard.SPACE]) {
-    	activeKeys[keyboard.SPACE] = false;
+		player.flip = 0;
+	}
+	
+	if (activeKeys[keyboard.SPACE])
 		player.attack();
-   	}
- 
+
 	for (let i = 0; i < entities.length; i++)
 		entities[i].update();
 
@@ -225,7 +226,7 @@ function render() {
   		}
   	}
 
-	camera.drawFrame(drawingSurface, true);
+	//camera.drawFrame(drawingSurface, true);
 }
 
 // CONTROLO DE TEMPO PARA BAIXAR O REFRESH RATE DO RequestAnimationFrame()
