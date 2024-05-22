@@ -62,6 +62,9 @@ function init() {
 	// Background 5
 	spriteSheetBack5 = new SpriteSheet("assets/images/background_5.png",
 		"assets/images/background_5.json", spriteLoaded);
+
+	window.addEventListener("keydown", keyDownHandler, false);
+	window.addEventListener("keyup", keyUpHandler, false);		
 }
 
 function spriteLoaded() {
@@ -99,8 +102,6 @@ function spriteLoaded() {
 		entities.push(background_5);
 
 		update();
-		window.addEventListener("keydown", keyDownHandler, false);
-		window.addEventListener("keyup", keyUpHandler, false);		
 	}
 }
 
@@ -118,6 +119,7 @@ function keyUpHandler(e) {
 		background_4.stop();
 		background_5.stop();
 	}
+		
 }
 
 function update() {
@@ -132,13 +134,21 @@ function update() {
 	}
 	
 	if (activeKeys[keyboard.SPACE]) {
-		activeKeys[keyboard.SPACE] = false;
-		player.attack();
-		
+		window.removeEventListener("keydown", keyDownHandler, false) // Não deixar entrar mais inputs
+		window.removeEventListener("keyup", keyUpHandler, false) // Não deixar entrar mais inputs
+		for (i = 0; i < activeKeys.length; i++) {	// Deixar apenas o Space a true
+			if (activeKeys[i] != keyboard.SPACE)
+				activeKeys[i] = false;
+		}
+		player.attack();	// Fazer a animação de ataque
+		setTimeout(() => {	// Interromper a animação infinita após 1 ciclo
+			activeKeys[keyboard.SPACE] = false;
+			player.stop();
+			window.addEventListener("keydown", keyDownHandler, false);
+			window.addEventListener("keyup", keyUpHandler, false);
+		}, 1000 / fps * 7); // 7 é o numero de frames para atacar
 	}
 		
-
-
 	for (let i = 0; i < entities.length; i++)
 		entities[i].update();
 
