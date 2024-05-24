@@ -257,3 +257,4 @@ function render() {
 // Para edição de imagens 
 // https://pinetools.com (Espelho, juncao e transformar o background branco em transparente)
 // https://www.remove.bg (Transformar o background branco em transparente)
+// https://ezgif.com (Separar as imagens de uma spritesheet)
