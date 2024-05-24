@@ -1,0 +1,5 @@
+1. Attack
+2. Death
+3. Walk
+4. Idle
+5. Hit

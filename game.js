@@ -136,12 +136,14 @@ function update() {
 	if (activeKeys[keyboard.SPACE]) {
 		window.removeEventListener("keydown", keyDownHandler, false) // Não deixar entrar mais inputs
 		window.removeEventListener("keyup", keyUpHandler, false) // Não deixar entrar mais inputs
+		player.vx = 0;
 		for (i = 0; i < activeKeys.length; i++) {	// Deixar apenas o Space a true
 			if (activeKeys[i] != keyboard.SPACE)
 				activeKeys[i] = false;
 		}
 		player.attack();	// Fazer a animação de ataque
 		setTimeout(() => {	// Interromper a animação infinita após 1 ciclo
+			player.vx = 15;
 			activeKeys[keyboard.SPACE] = false;
 			player.stop();
 			window.addEventListener("keydown", keyDownHandler, false);
